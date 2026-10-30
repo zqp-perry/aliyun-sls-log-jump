@@ -10,7 +10,7 @@
 
 适用版本：**IntelliJ IDEA 2026.2，build 262.9437.185 起的 262 分支**。其他 IDEA 版本暂未验证。
 
-安装后打开 `aliyun-SLS-Log-jump` 工具窗口，点击「连接配置」填写自己的 Endpoint、Project 和 Logstore。详细步骤见下文。
+首次使用请先完成下方的[使用前置条件](#使用前置条件)，准备好本机凭证，再打开 `aliyun-SLS-Log-jump` 工具窗口填写 Endpoint、Project 和 Logstore。
 
 [安装包目录](downloads/) · [SHA-256 校验值](downloads/SHA256SUMS)
 
@@ -18,6 +18,64 @@
 项目地址：[zqp-perry/aliyun-sls-log-jump](https://github.com/zqp-perry/aliyun-sls-log-jump)。
 
 此目录是独立的公开版副本。内部版未改动；公开版使用独立的插件 ID、工具窗口和配置存储，可与内部版区分。当前已提交 Marketplace 审核，项目采用 [MIT 许可证](LICENSE)。
+
+## 使用前置条件
+
+使用前需要准备：
+
+- 符合上方版本要求的 IntelliJ IDEA，以及本地对应的 Java 源码（用于堆栈跳转）。
+- 已有 SLS Project 和 Logstore、可查询的日志及所需索引，本机能够访问对应 Endpoint，当前凭证有权限查询该日志库。
+- 可用的本机阿里云凭证。**通常先安装并配置阿里云 CLI；如果已经给 IDEA 进程设置完整凭证环境变量，则可以不安装 CLI。两种方式任选其一。**
+
+### 方式一：安装并配置阿里云 CLI
+
+本插件会读取本机阿里云 CLI 保存的凭证配置，首次使用需先完成安装和凭证配置。只安装 CLI、只登录浏览器中的阿里云控制台，或只在远程 Cloud Shell 中完成配置，都不能替代本机凭证准备。
+
+官方文档：
+
+- **[安装/更新阿里云 CLI（Linux、macOS、Windows）](https://help.aliyun.com/zh/cli/install-update-alibaba-cloud-cli)**
+- **[阿里云 CLI 凭证配置与管理](https://help.aliyun.com/zh/cli/configure-credentials)**
+- [配置 StsToken 临时安全凭证](https://help.aliyun.com/zh/cli/temporary-security-credentials-sts-token)
+- [配置 AK 凭证](https://help.aliyun.com/zh/cli/ak-credential)
+
+1. 按官方安装文档选择自己的操作系统完成安装，然后在本机终端确认命令可用：
+
+   ```bash
+   aliyun version
+   ```
+
+2. 根据自己已有的凭证类型配置一个 profile。两条命令选择一条，按终端提示输入自己的凭证和地域；`sls-log-jump` 只是示例配置名称。
+
+   已有 STS 临时凭证：
+
+   ```bash
+   aliyun configure --mode StsToken --profile sls-log-jump
+   ```
+
+   已有 AccessKey ID / AccessKey Secret：
+
+   ```bash
+   aliyun configure --mode AK --profile sls-log-jump
+   ```
+
+3. 将它设为当前激活的配置，并检查配置列表：
+
+   ```bash
+   aliyun configure switch --profile sls-log-jump
+   aliyun configure list
+   ```
+
+   插件使用 `current` 指向的配置。创建多套账号配置后，请确认当前选中的是有权访问目标 SLS 项目的账号。
+
+4. 回到 IDEA，在「连接配置」中填写 Endpoint、Project 和 Logstore，保存后查询。
+
+配置文件默认位于当前电脑用户目录下：Linux/macOS 为 `~/.aliyun/config.json`，Windows 为 `%USERPROFILE%\.aliyun\config.json`。请使用运行 IDEA 的同一系统用户配置凭证。
+
+**支持范围：本插件目前直接读取 `AK` 和 `StsToken` 模式，不会替 CLI 执行 OAuth、CloudSSO、RamRoleArn 等登录或角色扮演流程，也不会自动刷新 STS。** 如果使用这些账号接入方式，需要先取得目标身份的有效 AK/STS 凭证，再按上述支持方式配置，或使用下面的环境变量方式。STS 过期后更新本机配置，下一次查询重新读取，无需重新安装插件。
+
+### 方式二：为 IDEA 设置凭证环境变量
+
+如果 IDEA 进程已经能读取完整的 `ALIBABA_CLOUD_ACCESS_KEY_ID` 和 `ALIBABA_CLOUD_ACCESS_KEY_SECRET`，以及使用 STS 时必需的 `ALIBABA_CLOUD_SECURITY_TOKEN`，则无需安装 CLI。环境变量的读取优先级和重启注意事项见下方[凭证说明](#凭证)。
 
 ## 使用方式
 
@@ -35,7 +93,7 @@
 
 控制台入口：[阿里云日志服务](https://sls.console.aliyun.com/)。获取资源信息可参考[官方 Project 管理说明](https://help.aliyun.com/zh/sls/manage-a-project)、[查询日志指引](https://help.aliyun.com/zh/sls/quick-guide-to-query-and-analysis)。
 
-4. 确保本机已经配置可查询该资源的阿里云凭证，见下节。
+4. 确保已按上方「使用前置条件」完成本机 CLI 凭证配置，或已为 IDEA 设置完整凭证环境变量。
 5. 选择时间范围后点击「查询」，或切换到「实时」。点击蓝色 Java 堆栈链接即可定位源码。
 
 首次查询或进入实时模式时，若没有目标配置，会先打开配置弹窗；取消不会发起请求。配置按当前 IDE 项目保存。保存新目标会停止旧目标的实时拉取，之后由使用者重新查询或进入实时模式。
