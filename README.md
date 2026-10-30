@@ -2,13 +2,26 @@
 
 在 IntelliJ IDEA 内查看阿里云 SLS 日志，点击 Java 异常堆栈跳转到本地源码。
 
+## 下载与安装
+
+**[⬇ 下载可直接安装的插件 ZIP（v0.1.0）](https://github.com/zqp-perry/aliyun-sls-log-jump/raw/refs/heads/main/downloads/aliyun-sls-log-jump-0.1.0.zip)**
+
+无需编译，下载后不要解压。打开 IDEA → **Settings → Plugins → 齿轮 → Install Plugin from Disk**，选择下载的 ZIP，按提示重启。
+
+适用版本：**IntelliJ IDEA 2026.2，build 262.9437.185 起的 262 分支**。其他 IDEA 版本暂未验证。
+
+安装后打开 `aliyun-SLS-Log-jump` 工具窗口，点击「连接配置」填写自己的 Endpoint、Project 和 Logstore。详细步骤见下文。
+
+[安装包目录](downloads/) · [SHA-256 校验值](downloads/SHA256SUMS)
+
+
 项目地址：[zqp-perry/aliyun-sls-log-jump](https://github.com/zqp-perry/aliyun-sls-log-jump)。
 
 此目录是独立的公开版副本。内部版未改动；公开版使用独立的插件 ID、工具窗口和配置存储，可与内部版区分。当前已提交 Marketplace 审核，项目采用 [MIT 许可证](LICENSE)。
 
 ## 使用方式
 
-1. 在 IDEA 中通过 Settings → Plugins → 齿轮 → Install Plugin from Disk 安装 `sls-jump-plugin/build/distributions/aliyun-sls-log-jump-0.1.0.zip`，按 IDE 提示重启。
+1. 点击上方「下载可直接安装的插件 ZIP」，通过 Settings → Plugins → 齿轮 → Install Plugin from Disk 安装，按 IDE 提示重启。
 2. 打开工具窗口 `aliyun-SLS-Log-jump`，点击「连接配置」。
 3. 只需填写三个字段：
 
