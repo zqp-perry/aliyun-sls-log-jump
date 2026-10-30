@@ -263,11 +263,9 @@ public final class SlsJumpToolWindowFactory implements ToolWindowFactory {
                 .subscribe(com.intellij.openapi.wm.ex.ToolWindowManagerListener.TOPIC,
                         new com.intellij.openapi.wm.ex.ToolWindowManagerListener() {
                             @Override
-                            public void stateChanged(@NotNull com.intellij.openapi.wm.ToolWindowManager wm,
-                                                     @NotNull com.intellij.openapi.wm.ToolWindow tw,
-                                                     @NotNull com.intellij.openapi.wm.ex.ToolWindowManagerListener.ToolWindowManagerEventType type) {
-                                if (!toolWindow.equals(tw)
-                                        || type != com.intellij.openapi.wm.ex.ToolWindowManagerListener.ToolWindowManagerEventType.HideToolWindow) {
+                            public void stateChanged(@NotNull com.intellij.openapi.wm.ToolWindowManager wm) {
+                                // 使用公开回调，依据本工具窗口的可见性停止后台轮询。
+                                if (toolWindow.isVisible()) {
                                     return;
                                 }
                                 // 工具窗口隐藏：停止实时（下次打开永远是历史默认，不留后台轮询）

@@ -4,7 +4,7 @@
 
 ## 下载与安装
 
-**[⬇ 下载可直接安装的插件 ZIP（v0.1.0）](https://github.com/zqp-perry/aliyun-sls-log-jump/raw/refs/heads/main/downloads/aliyun-sls-log-jump-0.1.0.zip)**
+**[⬇ 下载可直接安装的插件 ZIP（v0.1.1）](https://github.com/zqp-perry/aliyun-sls-log-jump/raw/refs/heads/main/downloads/aliyun-sls-log-jump-0.1.1.zip)**
 
 无需编译，下载后不要解压。打开 IDEA → **Settings → Plugins → 齿轮 → Install Plugin from Disk**，选择下载的 ZIP，按提示重启。
 
@@ -12,7 +12,7 @@
 
 首次使用请先完成下方的[使用前置条件](#使用前置条件)，准备好本机凭证，再打开 `aliyun-SLS-Log-jump` 工具窗口填写 Endpoint、Project 和 Logstore。
 
-[安装包目录](downloads/) · [SHA-256 校验值](downloads/SHA256SUMS)
+[安装包目录](downloads/) · [SHA-256 校验值](downloads/SHA256SUMS) · [0.1.1 兼容性验证说明](docs/verification-0.1.1.md)
 
 
 项目地址：[zqp-perry/aliyun-sls-log-jump](https://github.com/zqp-perry/aliyun-sls-log-jump)。
@@ -135,7 +135,7 @@ cd sls-jump-plugin
 脚本在需要时通过 Maven 获取 `dependencies.pom.xml` 中的运行依赖和固定版本的 JUnit，编译源码、运行测试，并生成：
 
 ```text
-build/distributions/aliyun-sls-log-jump-0.1.0.zip
+build/distributions/aliyun-sls-log-jump-0.1.1.zip
 ```
 
 测试不连接真实 SLS，也不读取本机真实云凭证。`build/` 中的依赖、class 和测试输出是本地生成文件，不能作为源码仓库内容提交。

@@ -1,7 +1,7 @@
 <idea-plugin url="https://github.com/zqp-perry/aliyun-sls-log-jump">
     <id>dev.slslogjump.public</id>
     <name>aliyun-SLS-Log-jump</name>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <vendor>SLS Log Jump Contributors</vendor>
     <description><![CDATA[
     <p>View Alibaba Cloud SLS logs in your IDE and jump from Java exception stack traces
@@ -23,6 +23,8 @@
     堆栈跳转需要本地存在对应的 Java 源码。当前界面为简体中文。</p>
     ]]></description>
     <change-notes><![CDATA[
+    <p>0.1.1: Replace internal/experimental tool-window callbacks and deprecated source-file lookup with public APIs.</p>
+    <p>0.1.1：使用公开 API 处理工具窗口状态变化和源码文件查找，修复兼容性检测中的内部、实验性和过时 API 告警。</p>
     <p>0.1.0: Public edition with per-project SLS target configuration and no preset internal resources.</p>
     <p>0.1.0：公开版支持 SLS 连接配置、历史与实时日志查看、日志筛选和 Java 异常堆栈跳转源码。</p>
     ]]></change-notes>

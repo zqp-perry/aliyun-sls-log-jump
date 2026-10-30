@@ -71,11 +71,10 @@ public final class StackFrameHyperlink implements com.intellij.execution.filters
         }
 
         // 三级：按文件名退化查找
-        PsiFile[] files = FilenameIndex.getFilesByName(
-                project, fileName, GlobalSearchScope.allScope(project));
-        if (files.length > 0) {
-            VirtualFile vf = files[0].getVirtualFile();
-            if (vf != null) {
+        var files = FilenameIndex.getVirtualFilesByName(
+                fileName, GlobalSearchScope.allScope(project));
+        for (VirtualFile vf : files) {
+            if (vf.isValid() && !vf.isDirectory()) {
                 new OpenFileDescriptor(project, vf).navigate(true);
                 NavigationLog.setLastMessage(
                         "本地未找到类 " + classFqn + "（分支或模块不一致），已打开同名文件 " + fileName);

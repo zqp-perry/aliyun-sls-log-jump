@@ -71,14 +71,14 @@ shutil.copytree(ROOT / "src/main/resources", classes, dirs_exist_ok=True)
 shutil.copy2(ROOT.parent / "LICENSE", classes / "META-INF/LICENSE")
 libs = BUILD / "libs"
 libs.mkdir(exist_ok=True)
-jar = libs / "aliyun-sls-log-jump-0.1.0.jar"
+jar = libs / "aliyun-sls-log-jump-0.1.1.jar"
 with zipfile.ZipFile(jar, "w", zipfile.ZIP_DEFLATED) as archive:
     for p in sorted(classes.rglob("*")):
         if p.is_file():
             archive.write(p, p.relative_to(classes).as_posix())
 dist = BUILD / "distributions"
 dist.mkdir(exist_ok=True)
-output = dist / "aliyun-sls-log-jump-0.1.0.zip"
+output = dist / "aliyun-sls-log-jump-0.1.1.zip"
 with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
     for p in [jar, *runtime]:
         archive.write(p, "aliyun-sls-log-jump/lib/" + p.name)
