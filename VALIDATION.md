@@ -15,8 +15,8 @@
 
 产物：`sls-jump-plugin/build/distributions/aliyun-sls-log-jump-0.1.0.zip`。
 
-SHA-256：`feca7106bd3fe19713eb138ef873ea53ae5c59d8b110fd4f842e885b03d21215`。
+SHA-256：`a1bfb2b14505ada029a7ad39a2395b6308c6d48e0993c7ea57f0312102eb13fb`。
 
-验证边界：未读取真实云凭证，未连接真实 SLS，未启动 IDE 做安装/交互验证，未运行 Plugin Verifier，也未提交 Marketplace。当前只声明用来编译的 262.9437.185 起的 262 分支；其他版本未验证。
+验证边界：未读取真实云凭证，未连接真实 SLS，未启动 IDE 做安装/交互验证，未运行 Plugin Verifier。Marketplace 已由作者提交审核，本次仅补齐源码及本地构建包的许可证。当前只声明用来编译的 262.9437.185 起的 262 分支；其他版本未验证。
 
-开源前仍需确定许可证、真实发布者名称、联系邮箱和主页。本副本不包含内部操作文档或私人工作记录。
+已添加 MIT 许可证，版权署名为 2026 zqp-perry；主 JAR 中的 META-INF/LICENSE 与仓库根目录 LICENSE 一致。仍需完善真实发布者名称、联系邮箱和主页。本副本不包含内部操作文档或私人工作记录。

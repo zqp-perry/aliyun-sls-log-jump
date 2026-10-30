@@ -68,6 +68,7 @@ result = run([java, "-cp", os.pathsep.join([str(junit), str(classes), str(tests)
 print(result.stdout, end="")
 (BUILD / "test-results.txt").write_text(result.stdout + result.stderr)
 shutil.copytree(ROOT / "src/main/resources", classes, dirs_exist_ok=True)
+shutil.copy2(ROOT.parent / "LICENSE", classes / "META-INF/LICENSE")
 libs = BUILD / "libs"
 libs.mkdir(exist_ok=True)
 jar = libs / "aliyun-sls-log-jump-0.1.0.jar"
