@@ -1,0 +1,11 @@
+.DS_Store
+.idea/
+*.iml
+.workbuddy/
+.env
+.env.*
+**/build/
+**/target/
+**/backup/
+dist/
+__pycache__/

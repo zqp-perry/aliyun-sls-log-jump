@@ -1,0 +1,39 @@
+<idea-plugin url="https://github.com/zqp-perry/aliyun-sls-log-jump">
+    <id>dev.slslogjump.public</id>
+    <name>aliyun-SLS-Log-jump</name>
+    <version>0.1.0</version>
+    <vendor>SLS Log Jump Contributors</vendor>
+    <description><![CDATA[
+    <p>View Alibaba Cloud SLS logs in your IDE and jump from Java exception stack traces
+    to the matching source line.</p>
+    <p>Query historical logs, follow live logs with pause and resume controls, and
+    filter by application or log level. Configure your own SLS target per IDE project.</p>
+
+    <h3>中文介绍</h3>
+    <p>在 IDEA 中直接查看阿里云日志服务（SLS）日志，点击 Java 异常堆栈即可跳转到本地源码对应行，帮助排查线上问题。</p>
+    <ul>
+      <li><b>异常堆栈跳转源码：</b>将日志中的 Java 堆栈帧显示为可点击链接，打开对应类和代码行，减少复制堆栈、手动查找源码的操作。</li>
+      <li><b>历史日志查询：</b>按时间范围查询 SLS 日志，在 IDE 控制台中查看结果。</li>
+      <li><b>实时日志查看：</b>持续拉取新增日志，支持暂停、恢复和重置，方便跟踪问题。</li>
+      <li><b>应用与级别筛选：</b>按应用过滤日志，或选择错误、警告、信息、调试等类型。</li>
+      <li><b>按项目保存连接：</b>填写自己的 Endpoint、Project 和 Logstore，即可连接目标 SLS 日志库。</li>
+    </ul>
+    <p>凭证自动读取本机环境变量或阿里云 CLI 配置，不在插件配置中保存 AK/SK。
+    应用筛选面向 Kubernetes 容器日志；其他日志来源可清空应用条件。
+    堆栈跳转需要本地存在对应的 Java 源码。当前界面为简体中文。</p>
+    ]]></description>
+    <change-notes><![CDATA[
+    <p>0.1.0: Public edition with per-project SLS target configuration and no preset internal resources.</p>
+    <p>0.1.0：公开版支持 SLS 连接配置、历史与实时日志查看、日志筛选和 Java 异常堆栈跳转源码。</p>
+    ]]></change-notes>
+    <idea-version since-build="262.9437.185" until-build="262.*"/>
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceImplementation="dev.slslogjump.SlsSettings"/>
+        <toolWindow id="aliyun-SLS-Log-jump"
+                    anchor="bottom"
+                    factoryClass="dev.slslogjump.SlsJumpToolWindowFactory"
+                    canCloseContents="false"/>
+    </extensions>
+</idea-plugin>
